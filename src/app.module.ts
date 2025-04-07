@@ -12,9 +12,7 @@ import { TasksModule } from './tasks/task.module';
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database:
-        process.env.DATABASE_PATH ??
-        join(__dirname, '..', 'data', 'tasks.sqlite'),
+      database: process.env.DATABASE_PATH ?? join(__dirname, '..', 'data', 'tasks.sqlite'),
       entities: [join(__dirname, '**', '*.entity.{ts,js}')],
       synchronize: true,
     }),
