@@ -11,10 +11,18 @@ import { TasksModule } from './tasks/task.module';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: process.env.DATABASE_PATH ?? join(__dirname, '..', 'data', 'tasks.sqlite'),
-      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
       synchronize: true,
+      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
     }),
     TasksModule,
   ],
