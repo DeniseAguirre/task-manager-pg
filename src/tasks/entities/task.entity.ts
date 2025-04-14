@@ -4,8 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from 'src/users/entities/user.entity';
 
 @Entity()
 export class Task {
@@ -24,6 +26,9 @@ export class Task {
   @ApiProperty({ example: false })
   @Column({ default: false })
   completed!: boolean;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  user!: User;
 
   @ApiProperty({ example: '2025-04-07T12:34:56.789Z' })
   @CreateDateColumn()
